@@ -3,6 +3,6 @@ pandas
 matplotlib
 streamlit
 seaborn
-sklearn
+scikit-learn
 imblearn
 keras
