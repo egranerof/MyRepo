@@ -2,3 +2,8 @@ numpy
 pandas
 matplotlib
 streamlit
+%matplotlib inline
+seaborn
+sklearn
+imblearn
+keras
