@@ -37,8 +37,11 @@ smo = SMOTE()
 X_ptb_sm,y_ptb_sm = smo.fit_resample(X_ptb,y_ptb)
 X_train_ptb_sm, X_test_ptb_sm, y_train_ptb_sm, y_test_ptb_sm = train_test_split(X_ptb_sm, y_ptb_sm, test_size = 0.2, random_state = 42)
 
+st.markdown('### • Modèles de Machine Learning')
+st.write("Afin de répondre à notre problématique de classification, nous avons dans un premier temps  "
+         "choisi des modèles d'apprentissage automatique supervisé tels que le Random forest,  "
+         "le Decision Tree, et ce avec les simples paramètres par défaut")
 
-st.write("### Modèles de Machine Learning") 
 choix = st.sidebar.radio("Base de données",['MITBIH', 'PTBDB']) 
 
 
@@ -138,3 +141,5 @@ if choix == 'MITBIH':
     elif display_choice == 'Confusion matrix':
         st.write('Confusion matrix:')
         st.dataframe(get_scores(clf, display_choice))
+    
+    

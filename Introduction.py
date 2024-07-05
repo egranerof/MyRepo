@@ -47,7 +47,7 @@ option = st.selectbox('Choix image', choix)
 st.image (option)
 
 texte = """
-Cependant, le diagnostic des arythmies est très complexe car chez certains patients, les symptômes peuvent se présenter de façon sporadique, tandis que d’autres peuvent être asymptomatiques.
+Cependant, le diagnostic des arythmies est très complexe car  certains patients, peuvent présenter des symptômes de façon sporadique, tandis que d’autres peuvent être asymptomatiques.
 
 Ces dernières années, plusieurs applications ont vu le jour, par exemple dans les montres connectées, les holters implantables, etc. Ces outils représentent une aide précieuse dans le diagnostic de ces pathologies qui peuvent être très dangereuses.
 """
@@ -65,7 +65,7 @@ st.subheader("Problématique du projet")
 texte = """
 Grâce aux différences des caractéristiques des signaux cardiaques observés sur les tracés d’ECG entre les différentes arythmies, notre objectif est de développer un modèle capable de capter ces caractéristiques et ainsi pouvoir classifier les différents battements dans les classes correspondantes.
 
-Pour ce faire, nous avons eu à notre disposition deux bases de données très connues : MITBIH et PTBDB.
+Pour ce faire, nous avons eu à notre disposition deux bases de données très préstigieuses : MITBIH et PTBDB.
 """
 
 st.write(texte)

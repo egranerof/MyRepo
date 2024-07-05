@@ -29,11 +29,11 @@ df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True)
 
 
 
+st.markdown('### • Pre processing des données')
 
-st.write("### Pre processing des données")
 texte = ("Lors de la phase d'exploration, nous avons constaté que les deux bases de données étaient propres, "
-        "absence de données manquantes, les valeurs étaient normalisées entre 0 et 1. "
-        "Par contre, lorsqu'on s'est intéressé à l'équilibre des données dans les différentes classes, "
+        "absence de données manquantes, les valeurs d'amplitude étaient normalisées entre 0 et 1. "
+        "Par contre, lorsqu'on s'est intéressé au nombres d'observation par catégorie, "
         "on constate qu'il y a un réel déséquilibre.")
 st.write(texte)
 
@@ -62,7 +62,7 @@ if show_graph:
     plt.xticks(ticks=[1, 0], labels=['Normal', 'Abnormal'],rotation=0)
     st.pyplot(fig)
 
-texte = ("Afin d'y remédier, nous avons choisi la méthode smote pour équilibrer nos 2 Dataset ")
+texte = ("Afin d'y remédier, nous avons choisi la méthode smote **Synthetic Minority Oversampling Technic** pour équilibrer nos 2 Datasets")
          
 
      # Affichage du texte avec Streamlit

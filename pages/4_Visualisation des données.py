@@ -10,8 +10,8 @@ df_mit = pd.concat([df_train, df_test], ignore_index=True)
 df_normal = pd.read_csv("ptbdb_normal.csv", header = None) 
 df_abnormal = pd.read_csv("ptbdb_abnormal.csv", header = None) 
 df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True) 
+st.markdown('### • Visualisation des données')
 
-st.write("### Visualisation des données") 
 choix = st.sidebar.radio("Base de données",['MITBIH', 'PTBDB']) 
 if choix == 'MITBIH':
   option = st.selectbox('Choisissez option à afficher', ('battement normal', 'un battement par classe', 'un battement par classe dans le même graphique', 'dizaine de battements par classe' )) 
