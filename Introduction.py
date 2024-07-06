@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 
 
 
-image_url = "/heart.jpg"  # Remplacez par l'URL de votre image ou le chemin de l'image
+image_url = "heart.jpg"  # Remplacez par l'URL de votre image ou le chemin de l'image
 
 # Titre personnalisé avec une image à côté
 title_with_image = f"""
 <div style="display: flex; align-items: center; background-color: lightblue; padding: 10px;">
-  <img src="{image_url}" alt="Logo" style="width:70px; height:70px; margin-right:15px;">
+  <img src="{image_url}" alt="Logo"; margin-right:15px;">
   <h1 style="color: black; font-size: 2em;">Classement des battements cardiaques</h1>
 </div>
 """
