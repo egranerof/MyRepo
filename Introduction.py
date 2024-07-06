@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 
-image_url = "heart.jpg"  # Remplacez par l'URL de votre image ou le chemin de l'image
+image_url = 'heart.jpg'  # Remplacez par l'URL de votre image ou le chemin de l'image
 
 # Titre personnalisé avec une image à côté
 title_with_image = f"""
