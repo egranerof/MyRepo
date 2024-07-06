@@ -46,7 +46,10 @@ option = st.selectbox('Choix image', choix)
 
 st.image (option)
 
-st.markdown('#')
+st.markdown('" "')
+st.markdown('" "')
+st.markdown('" "')
+
 
 texte = """
 Cependant, le diagnostic des arythmies est très complexe car  certains patients, peuvent présenter des symptômes de façon sporadique, tandis que d’autres peuvent être asymptomatiques.
@@ -62,7 +65,9 @@ if show_image:
     
     st.image("RMS_476_1192_fig01_i1200.jpg")
 
-st.markdown('#')
+st.markdown('" "')
+st.markdown('" "')
+st.markdown('" "')
 st.subheader("Problématique du projet")
 
 texte = """
