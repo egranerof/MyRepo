@@ -14,7 +14,7 @@ image_url = "https://github.com/egranerof/MyRepo/blob/main/images/heart.jpg?raw=
 title_with_image = f"""
 <div style="display: flex; align-items: center; background-color: lightblue; padding: 10px;">
   <img src="{image_url}" alt="Logo" style="width:70px; height:70px; margin-right:15px;">
-  <h1 style="color: black; font-size: 2em;">Classement des battements cardiaques</h1>
+  <h1 style="color: black; font-size: 2em;">Classification des battements cardiaques</h1>
 </div>
 """
 
@@ -46,8 +46,9 @@ option = st.selectbox('Choix image', choix)
 
 st.image (option)
 
+st.markdown('#')
+
 texte = """
-\n \n
 Cependant, le diagnostic des arythmies est très complexe car  certains patients, peuvent présenter des symptômes de façon sporadique, tandis que d’autres peuvent être asymptomatiques.
 
 Ces dernières années, plusieurs applications ont vu le jour, par exemple dans les montres connectées, les holters implantables, etc. Ces outils représentent une aide précieuse dans le diagnostic de ces pathologies qui peuvent être très dangereuses.
@@ -61,12 +62,15 @@ if show_image:
     
     st.image("RMS_476_1192_fig01_i1200.jpg")
 
+st.markdown('#')
 st.subheader("Problématique du projet")
 
 texte = """
 Grâce aux différences des caractéristiques des signaux cardiaques observés sur les tracés d’ECG entre les différentes arythmies, notre objectif est de développer un modèle capable de capter ces caractéristiques et ainsi pouvoir classifier les différents battements dans les classes correspondantes.
 
-Pour ce faire, nous avons eu à notre disposition deux bases de données très préstigieuses : MITBIH et PTBDB.
+Pour ce faire, nous avons eu à notre disposition deux bases de données très préstigieuses : 
+ - MITBIH
+ - PTBDB
 """
 
 st.write(texte)
