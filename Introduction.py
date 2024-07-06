@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 
 image_url = 'heart.jpg'  # Remplacez par l'URL de votre image ou le chemin de l'image
-
+st.image(image_url, caption="Verificación de la imagen 'heart.jpg'", use_column_width=True)
 # Titre personnalisé avec une image à côté
 title_with_image = f"""
 <div style="display: flex; align-items: center; background-color: lightblue; padding: 10px;">
