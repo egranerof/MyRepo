@@ -7,21 +7,22 @@ import numpy as np
 import matplotlib.pyplot as plt 
 
 
+image_path = "heart.png"  # Remplacez par l'URL de votre image ou le chemin de l'image
 
-image_url = "heart.png"  # Remplacez par l'URL de votre image ou le chemin de l'image
+# Utiliza la función st.image para cargar la imagen
+if image_path:
+    st.image(image_path, width=70)
 
-# Titre personnalisé avec une image à côté
+# Título personalizado con una imagen al lado
 title_with_image = f"""
 <div style="display: flex; align-items: center; background-color: lightblue; padding: 10px;">
-  <img src="{image_url}" alt="Logo" style="width:70px; height:70px; margin-right:15px;">
+  <img src="{image_path}" alt="Logo" style="width:70px; height:70px; margin-right:15px;">
   <h1 style="color: black; font-size: 2em;">Classement des battements cardiaques</h1>
 </div>
 """
 
-# Afficher le titre personnalisé avec l'image
+# Mostrar el título personalizado con la imagen
 st.markdown(title_with_image, unsafe_allow_html=True)
-
-
 
 st.header("• Introduction") 
 
