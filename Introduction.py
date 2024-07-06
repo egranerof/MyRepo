@@ -23,7 +23,7 @@ st.markdown(title_with_image, unsafe_allow_html=True)
 
 
 
-st.header("• Introduction") 
+st.header("Introduction") 
 
 st.subheader("Contexte du projet")
  
@@ -40,7 +40,7 @@ Lorsque la formation ou la conduction de l’excitation électrique sont perturb
 Ces perturbations sont alors visibles sur les tracés ECG et permettent donc le diagnostic de certaines maladies cardiovasculaires : les arythmies cardiaques, les infarctus du myocarde...
 """
 st.write(texte)
-choix = ['OIP.jpg', 'cvs_ecg_reading_fr.gif'] 
+choix = ['Examen.jpg', 'LectureECG.gif'] 
 
 option = st.selectbox('Choix image', choix) 
 
