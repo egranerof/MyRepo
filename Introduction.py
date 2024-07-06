@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 
-image_url = "heart.jpg"  # Remplacez par l'URL de votre image ou le chemin de l'image
+image_url = "\images\heart.jpg"  # Remplacez par l'URL de votre image ou le chemin de l'image
 
 # Titre personnalisé avec une image à côté
 title_with_image = f"""
@@ -29,7 +29,7 @@ st.subheader("Contexte du projet")
  
 
 texte = """
-Dans notre projet, on s’intéresse à l’activité électrique du cœur, responsable du rythme cardiaque (contraction: systole et relaxation: diastole). Cette activité est mesurée grâce à un appareil nommé électrocardiogramme(ECG). Il permet d’enregistrer une succession de séquences de l’activité électrique du cœur, représentée par des ondes : 
+Dans notre projet, on s’intéresse à l’activité électrique du cœur, responsable du rythme cardiaque (contraction: systole et relaxation: diastole). Cette activité est mesurée grâce à un appareil nommé électrocardiogramme (ECG). Il permet d’enregistrer une succession de séquences de l’activité électrique du cœur, représentée par des ondes : 
 
 - **P** : l’activation des oreillettes
 - **Complexe QRS** : correspond à la contraction des ventricules
