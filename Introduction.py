@@ -47,8 +47,7 @@ option = st.selectbox('Choix image', choix)
 st.image (option)
 
 texte = """
-
-
+\n \n
 Cependant, le diagnostic des arythmies est très complexe car  certains patients, peuvent présenter des symptômes de façon sporadique, tandis que d’autres peuvent être asymptomatiques.
 
 Ces dernières années, plusieurs applications ont vu le jour, par exemple dans les montres connectées, les holters implantables, etc. Ces outils représentent une aide précieuse dans le diagnostic de ces pathologies qui peuvent être très dangereuses.
