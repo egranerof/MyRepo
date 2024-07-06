@@ -4,14 +4,13 @@ import streamlit as st
 choix = st.sidebar.radio("Base de données",['MITBIH', 'PTBDB']) 
 
 tabs = st.tabs(["Pestaña 1", "Pestaña 2"])
-
-    with tabs[0]:
-        st.header("Contenido de la Pestaña 1")
-        st.write("Aquí puedes poner cualquier contenido para la pestaña 1.")
+with tabs[0]:
+    st.header("Contenido de la Pestaña 1")
+    st.write("Aquí puedes poner cualquier contenido para la pestaña 1.")
     
-    with tabs[1]:
-        st.header("Contenido de la Pestaña 2")
-        st.write("Aquí puedes poner cualquier contenido para la pestaña 2.")
+with tabs[1]:
+    st.header("Contenido de la Pestaña 2")
+    st.write("Aquí puedes poner cualquier contenido para la pestaña 2.")
 
 
 if choix == 'MITBIH': 
