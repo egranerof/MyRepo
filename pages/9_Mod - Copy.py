@@ -88,20 +88,23 @@ st.write("Afin de répondre à notre problématique de classification, nous avon
          "le Decision Tree, et ce avec les simples paramètres par défaut")
 
 
-def train_and_save_model(classifier, file_name):
-    if classifier == 'Random Forest':
-        clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
-        clf.fit(X_train_sm, y_train_sm)
-        joblib.dump(clf, file_name, compress=('gzip', 2))
-        return clf
+def train_and_save_model():
+    clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
+    clf.fit(X_train_sm, y_train_sm)
+    joblib.dump(clf, "random_forest_model.pkl.gz", compress=('gzip', 2))
+    return clf
+    
+if st.button('Entrenar y guardar modelo'):
+    train_and_save_model()
 
-
-def train_and_save_model2(classifier, file_name):
-    if classifier == 'Decision Tree':
-        clf = DecisionTreeClassifier(criterion='gini', random_state=123)
-        clf.fit(X_train_ptb_sm, y_train_ptb_sm)
-        joblib.dump(clf, file_name, compress=('gzip', 2))
-        return clf
+def train_and_save_model2():
+    clf = DecisionTreeClassifier(criterion='gini', random_state=123)
+    clf.fit(X_train_ptb_sm, y_train_ptb_sm)
+    joblib.dump(clf, "decision_tree_model.pkl.gz", compress=('gzip', 2))
+    return clf
+    
+if st.button('Entrenar y guardar modelo2'):
+    train_and_save_model2()
 
 # Fonction pour charger un modèle sauvegardé
 def load_model(file_name):
