@@ -16,6 +16,8 @@ from sklearn import svm
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 import joblib
 import os
+import pickle
+import gzip
 
 
 html_text = """
@@ -91,7 +93,8 @@ st.write("Afin de répondre à notre problématique de classification, nous avon
 def train_and_save_model():
     clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
     clf.fit(X_train_sm, y_train_sm)
-    joblib.dump(clf, "random_forest_model.pkl.gz", compress=('gzip', 2))
+    with gzip.open('random_forest_model.pkl.gz', 'wb') as f:
+        pickle.dump(model, f)
     return clf
     
 if st.button('Entrenar y guardar modelo'):
@@ -100,17 +103,12 @@ if st.button('Entrenar y guardar modelo'):
 def train_and_save_model2():
     clf = DecisionTreeClassifier(criterion='gini', random_state=123)
     clf.fit(X_train_ptb_sm, y_train_ptb_sm)
-    joblib.dump(clf, "decision_tree_model.pkl.gz", compress=('gzip', 2))
+    with gzip.open('decision_tree_model.pkl.gz', 'wb') as f:
+        pickle.dump(model, f)
     return clf
     
 if st.button('Entrenar y guardar modelo2'):
     train_and_save_model2()
-
-# Fonction pour charger un modèle sauvegardé
-def load_model(file_name):
-    if os.path.exists(file_name):
-        return joblib.load(file_name)
-    return None
 
 # Fonction pour obtenir les scores
 def get_scores(clf, choice):
@@ -152,7 +150,8 @@ with tabs[0]:
 
 
     # Charger ou entraîner le modèle sélectionné
-    clf = joblib.load('random_forest_model.pkl.gz')
+    with gzip.open('random_forest_model.pkl.gz', 'rb') as f:
+        clf = pickle.load(f)
     if clf is None:
         st.write('Le modèle n\'a pas été trouvé.')
     else:
@@ -173,7 +172,8 @@ with tabs[1]:
 
 
     # Charger ou entraîner le modèle sélectionné
-    clf2 = joblib.load('decision_tree_model.pkl.gz')
+    with gzip.open('decision_tree_model.pkl.gz', 'rb') as f:
+        clf = pickle.load(f)
     if clf2 is None:
         st.write('Le modèle n\'a pas été trouvé.')
     else:
