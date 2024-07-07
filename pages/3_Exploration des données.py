@@ -49,8 +49,22 @@ Un premier prétraitement des signaux ECG a été réalisé permettant l'extract
 
 st.write(texte)  
 
-option = st.selectbox('Choisissez le DataFrame à afficher', ('MITBIH', 'PTBDB')) 
+tabs = st.tabs(["**MITBIH**", "**PTBDB**"])
 
+css = '''
+<style>
+  button[data-baseweb="tab"] {
+  font-size: 24px;
+  margin: 0;
+  width: 100%;
+  }
+  .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+  font-size:1.5rem;
+  }
+</style>
+'''
+
+st.markdown(css, unsafe_allow_html=True)
 
 def check_missing_values(df_mit): 
 
@@ -73,24 +87,18 @@ def check_missing_values(df_ptb):
     return "Non" 
 
 
-
-if option == 'MITBIH':
+with tabs[0]:
   st.write("Le jeu de données MITBIH est téléchargeable sur le [lien Kaggle](https://www.kaggle.com/datasets/shayanfazeli/heartbeat), il se présente sous 2 fichiers csv, un fichier Train et un fichier Test")
-  
-
-
-  st.header('MITBIH')
-   
-  
+  st.subheader('MITBIH')
   st.dataframe(df_mit.head()) 
 
   st.write(f"Shape: {df_mit.shape}") 
 
   st.write(f"Valeurs manquantes: {check_missing_values(df_mit)}") 
 
-else: 
+with tabs[1]:
   st.write("Le jeu de données PTBDB est téléchargeable sur le [lien Kaggle](https://www.kaggle.com/datasets/shayanfazeli/heartbeat), il se présente sous 2 fichiers csv fichier Normal et fichier Abnormal")
-  st.header('PTBDB')
+  st.subheader('PTBDB')
   st.dataframe(df_ptb.head()) 
 
   st.write(f"Shape: {df_ptb.shape}") 

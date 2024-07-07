@@ -21,9 +21,6 @@ css = '''
 st.markdown(css, unsafe_allow_html=True)
 
 with tabs[0]:
-    # st.header("Contenido de la Pestaña 1")
-    # st.write("Aquí puedes poner cualquier contenido para la pestaña 1.")
-
     st.markdown('#### Présentation de la base de données MITBIH')
    
     st.write("- Elle est issu d'une collaboration entre le Beth Israel Deaconess Medical Center et le MIT (Massachusetts Institute of Technology) depuis 1975")  
@@ -46,9 +43,6 @@ with tabs[0]:
     st.write("Classe 4: Unclassifiable Beats") 
     
 with tabs[1]:
-    # st.header("Contenido de la Pestaña 2")
-    # st.write("Aquí puedes poner cualquier contenido para la pestaña 2.")
-
     st.markdown('#### Présentation de la base de données PTBDB') 
     st.write("- La base de données contient 549 enregistrements de 290 sujets")
     st.write("- Chaque sujet est représenté par un à cinq enregistrements") 

@@ -31,16 +31,35 @@ def load_data2():
 df_ptb = load_data2()
 
 
-st.markdown('### • Visualisation des données')
+st.markdown('### Visualisation des données')
 
-choix = st.sidebar.radio("Base de données",['MITBIH', 'PTBDB']) 
-if choix == 'MITBIH':
+tabs = st.tabs(["**MITBIH**", "**PTBDB**"])
+
+css = '''
+<style>
+  button[data-baseweb="tab"] {
+  font-size: 24px;
+  margin: 0;
+  width: 100%;
+  }
+  .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+  font-size:1rem;
+  }
+</style>
+'''
+
+st.markdown(css, unsafe_allow_html=True)
+  
+  
+with tabs[0]:
+  
   option = st.selectbox('Choisissez option à afficher', ('battement normal', 'un battement par classe', 'un battement par classe dans le même graphique', 'dizaine de battements par classe' )) 
   if option == 'battement normal':
     fig = plt.figure() 
     plt.plot(df_mit.iloc[0]) 
     plt.xlabel('Durée en ms') 
-    plt.ylabel('Valeurs normalisées') 
+    plt.ylabel('Valeurs normalisées')
+    plt.xticks(range(0,190,25))
     st.pyplot(fig) 
 
   df_mit_0=df_mit[df_mit.iloc[:,187]==0.0] 
@@ -128,24 +147,16 @@ if choix == 'MITBIH':
 
     st.pyplot(fig) 
 
- 
+with tabs[1]:
 
- 
-
- 
-
-if choix == 'PTBDB': 
-
-  
-
+# if choix == 'PTBDB': 
   fig = plt.figure() 
-
   plt.plot(df_ptb.iloc[0]) 
 
   plt.xlabel('Durée en ms')
   plt.ylabel('Valeurs normalisées') 
 
-  plt.title('Graphique pour une seule ligne du DataFrame') 
+  plt.title('Exemple de Battement Normal') 
 
   st.pyplot(fig) 
 
