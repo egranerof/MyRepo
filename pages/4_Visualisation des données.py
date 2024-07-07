@@ -3,13 +3,34 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-df_train = pd.read_csv("mitbih_train.csv", header = None) 
-df_test = pd.read_csv("mitbih_test.csv", header = None) 
-df_mit = pd.concat([df_train, df_test], ignore_index=True)  
+@st.cache_data  # 👈 Add the caching decorator
+def load_data():
+    
+    archivos = [f'parte_{i+1}.csv' for i in range(5)]
+    dfs = []
 
-df_normal = pd.read_csv("ptbdb_normal.csv", header = None) 
-df_abnormal = pd.read_csv("ptbdb_abnormal.csv", header = None) 
-df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True) 
+    for archivo in archivos:  
+        df_part = pd.read_csv(archivo)
+        dfs.append(df_part)
+
+    df_mit = pd.concat(dfs, ignore_index=True)
+
+    return df_mit
+
+df_mit = load_data()
+
+@st.cache_data  # 👈 Add the caching decorator
+def load_data2():
+    df_normal = pd.read_csv("ptbdb_normal.csv", header = None) 
+    df_abnormal = pd.read_csv("ptbdb_abnormal.csv", header = None) 
+
+    df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True)
+    
+    return df_ptb
+
+df_ptb = load_data2()
+
+
 st.markdown('### • Visualisation des données')
 
 choix = st.sidebar.radio("Base de données",['MITBIH', 'PTBDB']) 

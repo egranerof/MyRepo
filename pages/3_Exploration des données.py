@@ -6,30 +6,37 @@ import numpy as np
 
 import matplotlib.pyplot as plt 
 
- 
+@st.cache_data  # 👈 Add the caching decorator
+def load_data():
+    
+    archivos = [f'parte_{i+1}.csv' for i in range(5)]
+    dfs = []
 
- 
+    for archivo in archivos:  
+        df_part = pd.read_csv(archivo)
+        dfs.append(df_part)
 
-df_train = pd.read_csv("mitbih_train.csv", header = None) 
+    df_mit = pd.concat(dfs, ignore_index=True)
 
-df_test = pd.read_csv("mitbih_test.csv", header = None) 
+    return df_mit
 
-df_mit = pd.concat([df_train, df_test], ignore_index=True)  
+df_mit = load_data()
 
+@st.cache_data  # 👈 Add the caching decorator
+def load_data2():
+    df_normal = pd.read_csv("ptbdb_normal.csv", header = None) 
+    df_abnormal = pd.read_csv("ptbdb_abnormal.csv", header = None) 
 
- 
+    df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True)
+    
+    return df_ptb
 
-df_normal = pd.read_csv("ptbdb_normal.csv", header = None) 
+df_ptb = load_data2()
 
-df_abnormal = pd.read_csv("ptbdb_abnormal.csv", header = None) 
-
-df_ptb = pd.concat([df_normal, df_abnormal], ignore_index=True)  
-
- 
-st.markdown('### • Exploration des données')
+st.markdown('### Exploration des données')
 
 texte = """
-un premier prétraitement des signaux ECG a été réalisé permettant l'extraction des battements. Les étapes sont les suivantes:
+Un premier prétraitement des signaux ECG a été réalisé permettant l'extraction des battements. Les étapes sont les suivantes:
 
 1. Séparer le signal ECG continu en fenêtres de 10 secondes et sélectionner une fenêtre de 10 secondes à partir d'un signal ECG.
 2. Normaliser les valeurs d'amplitude pour les amener à une plage entre zéro et un.
@@ -42,7 +49,7 @@ un premier prétraitement des signaux ECG a été réalisé permettant l'extract
 
 st.write(texte)  
 
-option = st.selectbox('Choisissez le DataFrame à afficher', ('df_mit', 'df_ptb')) 
+option = st.selectbox('Choisissez le DataFrame à afficher', ('MITBIH', 'PTBDB')) 
 
  
 
@@ -68,12 +75,12 @@ def check_missing_values(df_ptb):
 
 
 
-if option == 'df_mit':
+if option == 'MITBIH':
   st.write("Le jeu de données MITBIH est téléchargeable sur le [lien Kaggle](https://www.kaggle.com/datasets/shayanfazeli/heartbeat), il se présente sous 2 fichiers csv, un fichier Train et un fichier Test")
   
 
 
-  st.header('df_mit')
+  st.header('MITBIH')
    
   
   st.dataframe(df_mit.head()) 
@@ -84,7 +91,7 @@ if option == 'df_mit':
 
 else: 
   st.write("Le jeu de données PTBDB est téléchargeable sur le [lien Kaggle](https://www.kaggle.com/datasets/shayanfazeli/heartbeat), il se présente sous 2 fichiers csv fichier Normal et fichier Abnormal")
-  st.header('df_ptb')
+  st.header('PTBDB')
   st.dataframe(df_ptb.head()) 
 
   st.write(f"Shape: {df_ptb.shape}") 
