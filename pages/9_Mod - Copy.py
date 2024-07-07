@@ -94,18 +94,18 @@ def train_and_save_model():
     clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
     clf.fit(X_train_sm, y_train_sm)
     with gzip.open('random_forest_model.pkl.gz', 'wb') as f:
-        pickle.dump(model, f)
+        pickle.dump(clf, f)
     return clf
     
 if st.button('Entrenar y guardar modelo'):
     train_and_save_model()
 
 def train_and_save_model2():
-    clf = DecisionTreeClassifier(criterion='gini', random_state=123)
-    clf.fit(X_train_ptb_sm, y_train_ptb_sm)
+    clf2 = DecisionTreeClassifier(criterion='gini', random_state=123)
+    clf2.fit(X_train_ptb_sm, y_train_ptb_sm)
     with gzip.open('decision_tree_model.pkl.gz', 'wb') as f:
-        pickle.dump(model, f)
-    return clf
+        pickle.dump(clf2, f)
+    return clf2
     
 if st.button('Entrenar y guardar modelo2'):
     train_and_save_model2()
