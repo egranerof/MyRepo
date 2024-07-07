@@ -173,7 +173,7 @@ with tabs[1]:
 
     # Charger ou entraîner le modèle sélectionné
     with gzip.open('decision_tree_model.pkl.gz', 'rb') as f:
-        clf = pickle.load(f)
+        clf2 = pickle.load(f)
     if clf2 is None:
         st.write('Le modèle n\'a pas été trouvé.')
     else:
