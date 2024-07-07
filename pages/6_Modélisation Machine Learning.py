@@ -69,20 +69,19 @@ st.write("Afin de répondre à notre problématique de classification, nous avon
          "le Decision Tree, et ce avec les simples paramètres par défaut")
 
 
-@st.cache_resource
 def train_and_save_model(classifier, file_name):
     if classifier == 'Random Forest':
         clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
         clf.fit(X_train_sm, y_train_sm)
-        joblib.dump(clf, file_name, compress=('gzip', 3))
+        joblib.dump(clf, file_name, compress=('gzip', 2))
         return clf
 
-@st.cache_resource
+
 def train_and_save_model2(classifier, file_name):
     if classifier == 'Decision Tree':
         clf = DecisionTreeClassifier(criterion='gini', random_state=123)
         clf.fit(X_train_ptb_sm, y_train_ptb_sm)
-        joblib.dump(clf, file_name, compress=('gzip', 3))
+        joblib.dump(clf, file_name, compress=('gzip', 2))
         return clf
 
 # Fonction pour charger un modèle sauvegardé
