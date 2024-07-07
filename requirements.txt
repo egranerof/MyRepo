@@ -6,3 +6,5 @@ seaborn
 scikit-learn
 imblearn
 keras
+joblib
+os
