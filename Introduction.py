@@ -62,7 +62,7 @@ show_image = st.checkbox('Afficher un example holter implantable')
 # Condition pour afficher l'image en fonction de la case à cocher
 if show_image:
     
-    st.image("RMS_476_1192_fig01_i1200.jpg")
+    st.image("images\RMS_476_1192_fig01_i1200.jpg")
 
 st.markdown(" ")
 st.subheader("Problématique du projet")

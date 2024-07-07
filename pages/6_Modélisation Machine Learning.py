@@ -42,21 +42,13 @@ def load_data2():
 
 
 @st.cache_data
-def smotesplit():
-    global X_train_sm, X_test_sm, y_train_sm, y_test_sm
-    global X_train_red, X_test_red, y_train_red, y_test_red
-    global X_train_ptb_sm, X_test_ptb_sm, y_train_ptb_sm, y_test_ptb_sm
-    
-    if 'df_mit' not in globals() or 'df_ptb' not in globals():
-        raise NameError("DataFrames df_mit y df_ptb no están definidos")
-
+def smotesplit(df_mit, df_ptb):
     smo = SMOTE()
-    
     X_mit = df_mit.iloc[:, :-1]
     y_mit = df_mit.iloc[:, -1]
     X_mit_sm, y_mit_sm = smo.fit_resample(X_mit, y_mit)
-    X_train_sm, X_test_sm, y_train_sm, y_test_sm = train_test_split(X_mit_sm, y_mit_sm, test_size=0.2, random_state=42)
-    X_train_red, X_test_red, y_train_red, y_test_red = train_test_split(X_train_sm, y_train_sm, test_size=0.7, random_state=42)
+    X_train_sm, X_test_sm, y_train_sm, y_test_sm = train_test_split(X_mit_sm, y_mit_sm, test_size=0.3, random_state=42)
+    # X_train_red, X_test_red, y_train_red, y_test_red = train_test_split(X_train_sm, y_train_sm, test_size=0.7, random_state=42)
     
     X_ptb = df_ptb.iloc[:, :-1]
     y_ptb = df_ptb.iloc[:, -1]
@@ -64,10 +56,11 @@ def smotesplit():
     X_ptb_sm, y_ptb_sm = smo2.fit_resample(X_ptb, y_ptb)
     X_train_ptb_sm, X_test_ptb_sm, y_train_ptb_sm, y_test_ptb_sm = train_test_split(X_ptb_sm, y_ptb_sm, test_size=0.2, random_state=42)
     
+    return X_train_sm, X_test_sm, y_train_sm, y_test_sm, X_train_ptb_sm, X_test_ptb_sm, y_train_ptb_sm, y_test_ptb_sm
 
 df_mit = load_data()
 df_ptb = load_data2()
-smotesplit()
+(X_train_sm, X_test_sm, y_train_sm, y_test_sm, X_train_ptb_sm, X_test_ptb_sm, y_train_ptb_sm, y_test_ptb_sm) = smotesplit(df_mit, df_ptb)
 
     
 st.markdown('### Modèles de Machine Learning')
@@ -81,24 +74,25 @@ def train_and_save_model(classifier, file_name):
     if classifier == 'Random Forest':
         clf = RandomForestClassifier(n_jobs = -1, random_state = 123)
         clf.fit(X_train_sm, y_train_sm)
-        joblib.dump(clf, file_name)
+        joblib.dump(clf, file_name, compress=('gzip', 3))
         return clf
-    elif classifier == 'Decision Tree':
+
+@st.cache_resource
+def train_and_save_model2(classifier, file_name):
+    if classifier == 'Decision Tree':
         clf = DecisionTreeClassifier(criterion='gini', random_state=123)
         clf.fit(X_train_ptb_sm, y_train_ptb_sm)
-        joblib.dump(clf, file_name)
+        joblib.dump(clf, file_name, compress=('gzip', 3))
         return clf
 
 # Fonction pour charger un modèle sauvegardé
-@st.cache_resource
 def load_model(file_name):
     if os.path.exists(file_name):
         return joblib.load(file_name)
     return None
 
 # Fonction pour obtenir les scores
-@st.cache_data
-def get_scores(_clf, choice):
+def get_scores(clf, choice):
     global X_test_sm, y_test_sm
     if choice == 'Accuracy':
         return accuracy_score(y_test_sm, clf.predict(X_test_sm))
@@ -107,13 +101,12 @@ def get_scores(_clf, choice):
 
 
 # Fonction pour obtenir les scores
-@st.cache_data
-def get_scores2(_clf, choice):
+def get_scores2(clf2, choice):
     global X_test_ptb_sm, y_test_ptb_sm
     if choice == 'Accuracy':
-        return accuracy_score(y_test_ptb_sm, clf.predict(X_test_ptb_sm))
+        return accuracy_score(y_test_ptb_sm, clf2.predict(X_test_ptb_sm))
     elif choice == 'Confusion matrix':
-        return confusion_matrix(y_test_ptb_sm, clf.predict(X_test_ptb_sm))
+        return confusion_matrix(y_test_ptb_sm, clf2.predict(X_test_ptb_sm))
 
 tabs = st.tabs(["**MITBIH**", "**PTBDB**"])
 
@@ -136,7 +129,7 @@ with tabs[0]:
     st.subheader("Le modèle Random Forest")
     # Définir le nom du fichier pour chaque modèle
     Projet = {
-        'Random Forest': 'random_forest_model.pkl'
+        'Random Forest': 'random_forest_model.pkl.gz'
     }
     classifier = 'Random Forest'
     Projet = Projet[classifier]
@@ -162,7 +155,7 @@ with tabs[1]:
     st.subheader("Le modèle Decision Tree")
     # Définir le nom du fichier pour chaque modèle
     Projet = {
-        'Decision Tree': 'decision_tree_model.pkl'
+        'Decision Tree': 'decision_tree_model.pkl.gz'
     }
 
     classifier = 'Decision Tree'
@@ -170,8 +163,8 @@ with tabs[1]:
 
     # Charger ou entraîner le modèle sélectionné
     clf2 = load_model(Projet)
-    if clf is None:
-        clf2 = train_and_save_model(classifier, Projet)
+    if clf2 is None:
+        clf2 = train_and_save_model2(classifier, Projet)
         st.write('Le modèle a été entraîné et sauvegardé.')
     else:
         st.write('Le modèle a été chargé depuis le fichier.')
