@@ -84,7 +84,7 @@ df_ptb = load_data2()
     
 st.markdown('### Modèles de Machine Learning')
 st.write("Afin de répondre à notre problématique de classification, nous avons dans un premier temps  "
-         "choisi des modèles d'apprentissage automatique supervisé tels que le Random forest,  "
+         "choisi des modèles d'apprentissage automatique supervisé tels que le Random forest et  "
          "le Decision Tree, et ce avec les simples paramètres par défaut")
 
 
@@ -146,17 +146,12 @@ st.markdown(css, unsafe_allow_html=True)
 with tabs[0]:
     st.subheader("Le modèle Random Forest")
     # Définir le nom du fichier pour chaque modèle
-    Projet = {
-        'Random Forest': 'random_forest_model.pkl.gz'
-    }
-    classifier = 'Random Forest'
-    Projet = Projet[classifier]
+
 
     # Charger ou entraîner le modèle sélectionné
-    clf = load_model(Projet)
+    clf = joblib.load('random_forest_model.pkl.gz')
     if clf is None:
-        clf = train_and_save_model(classifier, Projet)
-        st.write('Le modèle a été entraîné et sauvegardé.')
+        st.write('Le modèle n\'a pas été trouvé.')
     else:
         st.write('Le modèle a été chargé depuis le fichier.')
 
@@ -172,21 +167,15 @@ with tabs[0]:
 with tabs[1]:
     st.subheader("Le modèle Decision Tree")
     # Définir le nom du fichier pour chaque modèle
-    Projet = {
-        'Decision Tree': 'decision_tree_model.pkl.gz'
-    }
 
-    classifier = 'Decision Tree'
-    Projet = Projet[classifier]
 
     # Charger ou entraîner le modèle sélectionné
-    clf2 = load_model(Projet)
+    clf2 = joblib.load('decision_tree_model.pkl.gz')
     if clf2 is None:
-        clf2 = train_and_save_model2(classifier, Projet)
-        st.write('Le modèle a été entraîné et sauvegardé.')
+        st.write('Le modèle n\'a pas été trouvé.')
     else:
         st.write('Le modèle a été chargé depuis le fichier.')
-
+    
     # Choix d'affichage de l'accuracy ou de la matrice de confusion
     display_choice2 = st.radio('Que souhaitez-vous montrer ?', ('Accuracy', 'Confusion matrix'), key=2)
     if display_choice2 == 'Accuracy':
