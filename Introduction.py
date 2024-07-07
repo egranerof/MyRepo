@@ -44,11 +44,10 @@ choix = ['Examen.jpg', 'LectureECG.gif']
 
 option = st.selectbox('Choix image', choix) 
 
-st.image (option)
+st.image(option)
 
-st.markdown('" "')
-st.markdown('" "')
-st.markdown('" "')
+st.markdown(" ")
+st.markdown(" ")
 
 
 texte = """
@@ -65,9 +64,7 @@ if show_image:
     
     st.image("RMS_476_1192_fig01_i1200.jpg")
 
-st.markdown('" "')
-st.markdown('" "')
-st.markdown('" "')
+st.markdown(" ")
 st.subheader("Problématique du projet")
 
 texte = """
