@@ -51,7 +51,6 @@ st.write(texte)
 
 option = st.selectbox('Choisissez le DataFrame à afficher', ('MITBIH', 'PTBDB')) 
 
- 
 
 def check_missing_values(df_mit): 
 
