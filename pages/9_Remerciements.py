@@ -7,7 +7,7 @@ html_text = """
         <a href="https://linkedin.com/in/soraya-merbah/" target="_blank">Soraya MERBAH</a>
     </p>
     <p style="font-size: 14px;">
-        <a href="https://linkedin.com/in/emanuelgf/" target="_blank">Emanuel FERNANDEZ GRANERO</a>
+        <a href="https://linkedin.com/in/emanuelgf/" target="_blank">Emanuel GRANERO-FERNANDEZ</a>
     </p>
 </div>
 """
