@@ -63,6 +63,49 @@ with col2:
     image = open('./images/model_cnn_plot2.png', 'rb').read()
     st.image(image, caption='Représentation graphique du modèle CNN', use_column_width=True)
 
+
+if 'show_code' not in st.session_state:
+    st.session_state.show_code = False
+
+# Función para alternar el estado de mostrar/ocultar código
+def toggle_code():
+    st.session_state.show_code = not st.session_state.show_code
+
+# Botón para mostrar/ocultar el código
+st.button("Afficher/cacher le code 'Modèle CNN1D'", on_click=toggle_code)
+
+# Bloque de código que se mostrará/ocultará
+if st.session_state.show_code:
+    code = '''
+    def create_cnn_model(input_shape, num_classes):
+        model = Sequential()
+        # Couche de convolution 1D avec 32 filtres de taille 3 et une activation ReLU
+        model.add(Conv1D(32, kernel_size=3, activation='relu', input_shape=(input_shape, 1)))
+        # Couche de regroupement (pooling) pour réduire la dimensionnalité
+        model.add(MaxPooling1D(pool_size=2))
+        # Couche de convolution 1D avec 64 filtres de taille 3 et une activation ReLU
+        model.add(Conv1D(64, kernel_size=3, activation='relu'))
+        # Couche de regroupement (pooling) pour réduire la dimensionnalité
+        model.add(MaxPooling1D(pool_size=2))
+        # Aplanir les sorties de la couche précédente
+        model.add(Flatten())
+        # Couche entièrement connectée avec 128 neurones et une activation ReLU
+        model.add(Dense(128, activation='relu'))
+        # Couche de régularisation Dropout pour éviter le surapprentissage
+        model.add(Dropout(0.5))
+        # Couche de sortie avec une activation softmax pour la classification
+        model.add(Dense(num_classes, activation='softmax'))
+        
+        # Compilation du modèle avec l'optimiseur Adam et la perte de catégorie croisée catégorique
+        model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    
+    return model
+    '''
+    st.code(code, language='python')
+else:
+    st.write("")
+
+
 st.markdown("---")
 st.subheader("Résultats : History, Classification Report et Matrice de Confusion")
 st.write("""
